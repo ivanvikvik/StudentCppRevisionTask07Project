@@ -8,6 +8,26 @@
 
 typedef bool(*CHESS_FUNCTION)(int, int, int, int);
 
+void print_test(string test_name, bool result) {
+	HANDLE h;
+	h = GetStdHandle(STD_OUTPUT_HANDLE);
+
+	string msg = test_name + " ";
+
+	if (result) {
+		msg += RIGHT;
+		SetConsoleTextAttribute(h, ((2 << 4) | 15));
+	}
+	else {
+		msg += WRONG;
+		SetConsoleTextAttribute(h, ((4 << 4) | 15));
+	}
+
+	cout << msg << endl;
+
+	SetConsoleTextAttribute(h, (0 | 15));
+}
+
 
 bool basic_check(CHESS_FUNCTION function) {
 	return !function(0, 2, 2, 2)
@@ -49,8 +69,7 @@ void testingTask01() {
 		&& task01(5, 3, 6, 2)
 		&& task01(5, 3, 6, 4);
 
-
-	cout << "Task 01 " << (result ? RIGHT : WRONG) << endl;
+	print_test("Task 01", result);
 }
 
 void testingTask02() {
@@ -76,7 +95,7 @@ void testingTask02() {
 		&& task02(6, 4, 8, 6)
 		&& task02(6, 4, 5, 5);
 
-	cout << "Task 02 " << (result ? RIGHT : WRONG) << endl;
+	print_test("Task 02", result);
 }
 
 void testingTask03() {
@@ -103,7 +122,7 @@ void testingTask03() {
 		&& task03(3, 6, 2, 8)
 		&& task03(3, 6, 1, 7);
 
-	cout << "Task 03 " << (result ? RIGHT : WRONG) << endl;
+	print_test("Task 03", result);
 }
 
 void testingTask04() {
@@ -143,5 +162,5 @@ void testingTask04() {
 		&& task04(6, 4, 6, 8)
 		&& task04(6, 4, 6, 5);
 
-	cout << "Task 04 " << (result ? RIGHT : WRONG) << endl;
+	print_test("Task 04", result);
 }
